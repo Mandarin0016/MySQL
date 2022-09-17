@@ -68,4 +68,3 @@ ALTER TABLE `users`
     PRIMARY KEY `users` (`id`),
     MODIFY COLUMN `username` VARCHAR(30) UNIQUE;
 
-# 10
