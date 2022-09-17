@@ -56,3 +56,16 @@ ALTER TABLE users
 
 ALTER TABLE users
     MODIFY COLUMN `last_login_time` DATETIME DEFAULT NOW();
+
+# MIDDLE (NOT FOR JUDGE)
+INSERT INTO `users` (`username`, `password`) VALUE ('test1', 'password');
+
+# 10
+
+ALTER TABLE `users`
+    DROP PRIMARY KEY,
+    ADD CONSTRAINT pk_users
+    PRIMARY KEY `users` (`id`),
+    MODIFY COLUMN `username` VARCHAR(30) UNIQUE;
+
+# 10
