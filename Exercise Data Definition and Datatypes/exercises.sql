@@ -49,6 +49,10 @@ VALUES ('pesho123', 'password123'),
 # 8
 
 ALTER TABLE users
-DROP PRIMARY KEY,
-ADD PRIMARY KEY `pk_users`(`id`, `username`);
+    DROP PRIMARY KEY,
+    ADD PRIMARY KEY `pk_users` (`id`, `username`);
 
+# 9
+
+ALTER TABLE users
+    MODIFY COLUMN `last_login_time` DATETIME DEFAULT NOW();
