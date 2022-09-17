@@ -46,5 +46,9 @@ VALUES ('pesho123', 'password123'),
        ('peter123', 'password123'),
        ('viktor123', 'password123');
 
+# 8
 
+ALTER TABLE users
+DROP PRIMARY KEY,
+ADD PRIMARY KEY `pk_users`(`id`, `username`);
 
