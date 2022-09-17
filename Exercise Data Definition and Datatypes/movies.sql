@@ -1,5 +1,3 @@
-USE `movies`;
-
 # 11
 
 CREATE TABLE `directors`
