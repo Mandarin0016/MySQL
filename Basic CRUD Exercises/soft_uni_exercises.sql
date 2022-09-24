@@ -79,3 +79,55 @@ LIMIT 5;
 SELECT `first_name`, `last_name`
 FROM `employees`
 WHERE `department_id` NOT IN (4);
+
+# 14
+
+SELECT *
+FROM `employees`
+ORDER BY `salary` DESC, `first_name`, `last_name` DESC, `middle_name`, `employee_id`;
+
+# 15
+
+CREATE VIEW `v_employees_salaries` AS
+SELECT `first_name`, `last_name`, `salary`
+FROM `employees`;
+
+# 16
+
+CREATE VIEW `v_employees_job_titles` AS
+SELECT CONCAT_WS(' ', `first_name`, `middle_name`, `last_name`) AS `full_name`, `job_title`
+FROM `employees`;
+
+# 17
+
+SELECT DISTINCT `job_title`
+FROM `employees`
+ORDER BY `job_title`;
+
+# 18
+
+SELECT *
+FROM `projects`
+ORDER BY `start_date`, `name`, `project_id`
+LIMIT 10;
+
+# 19
+
+SELECT `first_name`, `last_name`, `hire_date`
+FROM `employees`
+ORDER BY `hire_date` DESC
+LIMIT 7;
+
+# 20
+
+UPDATE `employees`
+SET `salary` = `salary` * 1.12
+WHERE `department_id` IN (1, 2, 4, 11);
+SELECT `salary`
+FROM `employees`;
+
+
+
+
+
+
