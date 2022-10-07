@@ -37,3 +37,22 @@ WHERE `salary` > 15000
 ORDER BY `d`.`department_id` DESC
 LIMIT 5;
 
+# 5
+
+SELECT `employees`.`employee_id`, `first_name`
+FROM `employees`
+         LEFT JOIN `employees_projects` ON `employees`.`employee_id` = `employees_projects`.`employee_id`
+WHERE `project_id` IS NULL
+ORDER BY `employee_id` DESC
+LIMIT 3;
+
+# 6
+
+SELECT `first_name`, `last_name`, `hire_date`, `name` AS 'dept_name'
+FROM `employees`
+         INNER JOIN `departments`
+                    ON `employees`.`department_id` = `departments`.`department_id`
+WHERE `hire_date` > DATE('1999-01-01')
+  AND `name` IN ('Sales', 'Finance')
+ORDER BY `hire_date`;
+
