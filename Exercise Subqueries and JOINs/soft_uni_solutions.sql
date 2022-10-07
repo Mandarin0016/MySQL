@@ -56,3 +56,58 @@ WHERE `hire_date` > DATE('1999-01-01')
   AND `name` IN ('Sales', 'Finance')
 ORDER BY `hire_date`;
 
+# 7
+
+SELECT `employees`.`employee_id`, `first_name`, `name` AS 'project_name'
+FROM `employees`
+         INNER JOIN `employees_projects` ON `employees`.`employee_id` = `employees_projects`.`employee_id`
+         INNER JOIN `projects` ON `employees_projects`.`project_id` = `projects`.`project_id`
+WHERE DATE(`start_date`) > '2002-08-13'
+  AND `end_date` IS NULL
+ORDER BY `first_name`, `name`
+LIMIT 5;
+
+# 8
+
+SELECT `e`.`employee_id`,
+       `first_name`,
+       (IF(YEAR(`p`.`start_date`) >= '2005', NULL, `name`)) AS 'project_name'
+FROM `employees` `e`
+         INNER JOIN `employees_projects` `ep` on `e`.`employee_id` = `ep`.`employee_id`
+         INNER JOIN `projects` `p` ON `ep`.`project_id` = `p`.`project_id`
+WHERE `ep`.`employee_id` = 24
+ORDER BY `project_name`;
+
+# 9
+
+SELECT `e1`.`employee_id`,
+       `e1`.`first_name`,
+       `e1`.`manager_id`,
+       (SELECT `em`.`first_name`
+        FROM `employees` `em`
+        WHERE `em`.`employee_id` = `e1`.`manager_id`) AS 'manager_name'
+FROM `employees` as `e1`
+WHERE `e1`.`manager_id` IN (3, 7)
+ORDER BY `first_name`;
+
+# 10
+
+SELECT `employee_id`,
+       CONCAT_WS(' ', `first_name`, `last_name`)     AS 'employee_name',
+       (SELECT CONCAT_WS(' ', `first_name`, `last_name`)
+        FROM `employees` `em`
+        WHERE `e`.`manager_id` = `em`.`employee_id`) AS 'manager_name',
+       `d`.`name`                                    AS 'department_name'
+FROM `employees` `e`
+         JOIN `departments` `d` USING (`department_id`)
+WHERE `e`.`manager_id` IS NOT NULL
+ORDER BY `e`.`employee_id`
+LIMIT 5;
+
+# 11
+
+SELECT AVG(`salary`) AS 'min_average_salary'
+FROM `employees` `e`
+GROUP BY `department_id`
+ORDER BY `min_average_salary`
+LIMIT 1;
